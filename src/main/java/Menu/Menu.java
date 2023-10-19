@@ -31,7 +31,7 @@ public class Menu {
         System.out.println("7. Ver historial de ventas               |");
         System.out.println("8. Salir                                 |");
         System.out.println("±----------------------------------------±");
-        System.out.print("   Ingresa tu opción:    (1 - 8)  ");
+        System.out.print("   Ingresa tu opción:    (1 - 8): ");
     }
 
     public static void handleUserChoice(int choice){
