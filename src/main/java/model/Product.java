@@ -1,14 +1,28 @@
 package model;
 
 public class Product {
+    private int id;
     private String name;
+    private String description;
     private double price;
     private int stock;
+    private String categories;
+    private String tags;
 
-    public Product(String name, double price, int stock) {
+    private static int ultimoId;
+
+    public Product(String name, String description, double price, int stock, String categories, String tags) {
+        this.id = ++ultimoId;
         this.name = name;
+        this.description = description;
         this.price = price;
         this.stock = stock;
+        this.categories = categories;
+        this.tags = tags;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -17,6 +31,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
@@ -35,9 +57,32 @@ public class Product {
         this.stock = stock;
     }
 
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
-        return "{ 'name':" + name + ", price:" + price + ", stock:" + stock + "}";
+        return "\nID: " + id +
+                "\nName: " + name +
+                "\nDescription: " + description +
+                "\nPrice: " + price +
+                "\nStock: " + stock +
+                "\nCategories: " + categories +
+                "\nTags: " + tags +
+                "\n\n";
     }
 
     public boolean hasStock(){
@@ -52,9 +97,8 @@ public class Product {
         return this.price < productPrice;
     }
 
-    public boolean productContainKeyWord(String keyWord){
-        String lowerCaseName = this.name.toLowerCase();
-        return lowerCaseName.contains(keyWord.toLowerCase());
+    public boolean productContainKeyWord(char letter){
+        return name.toLowerCase().contains(Character.toString(letter).toLowerCase());
     }
 
 

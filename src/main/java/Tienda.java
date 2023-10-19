@@ -1,15 +1,12 @@
 import model.Product;
 import model.ProductsArray;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tienda {
     public static void main(String[] args) {
-        ProductsArray productsList = new ProductsArray();
-        productsList.fillProductsList();
-        productsList.showProductsByLetter("Y");
-        productsList.printProductsAlphabeticalOrder();
-//        runMenu();
+        runMenu();
     }
 
     public static void runMenu(){

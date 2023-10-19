@@ -1,3 +1,9 @@
+import model.Product;
+import model.ProductsArray;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Menu {
     public static void displayMenu(){
         System.out.println(
@@ -40,12 +46,36 @@ public class Menu {
         }
     }
 
+    static ProductsArray productsArray = new ProductsArray();
+
     public static void addProduct(){
-        System.out.println("\nProducto añadido\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el nombre del producto: ");
+        String name = scanner.nextLine();
+        System.out.print("Ingrese la descripcion del producto: ");
+        String desc = scanner.nextLine();
+        System.out.print("Ingrese el precio del producto: ");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Ingrese la cantidad de stock del producto: ");
+        int stock = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Ingrese la categoria del producto: ");
+        String categories = scanner.nextLine();
+        System.out.print("Ingrese las etiquetas del producto: ");
+        String tags = scanner.nextLine();
+
+        productsArray.addProduct(new Product(name, desc, price, stock, categories, tags));
+
+        System.out.println("\n******Producto añadido con exito******\n");
     }
 
     public static void removeProduct(){
-        System.out.println("\nProducto eliminado\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese nombre del producto a eliminar: ");
+        String productName = scanner.nextLine();
+        productsArray.removeProduct(productName);
+        System.out.println("\n******Producto eliminado******\n");
     }
 
     public static void updateProduct(){
@@ -66,5 +96,9 @@ public class Menu {
 
     public static void seeAllProducts(){
         System.out.println("\nListado de todos los productos\n");
+        ArrayList<Product> allProducts = productsArray.getAllProducts();
+        for (Product product : allProducts) {
+            System.out.println(product);
+        }
     }
 }
