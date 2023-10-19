@@ -1,7 +1,5 @@
-import model.Product;
-import model.ProductsArray;
+import Menu.Menu;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tienda {

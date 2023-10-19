@@ -1,5 +1,7 @@
-import model.Product;
-import model.ProductsArray;
+package Menu;
+
+import Product.Product;
+import Product.ProductsArray;
 
 import java.util.ArrayList;
 import java.util.Scanner;
