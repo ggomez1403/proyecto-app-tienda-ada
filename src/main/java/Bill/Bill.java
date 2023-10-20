@@ -27,11 +27,13 @@ public class Bill {
     }
 
     public double calculateTotal(){
-        double total = 0.0;
+        double subTotal = 0.0;
+        double ivaRate = 19.0;
         for (BillItem item:items){
-            total += item.calcularSubtotal();
+            subTotal += item.calcularSubtotal();
         }
-        return total;
+        double ivaTotal = (subTotal * ivaRate) / 100.0;
+        return subTotal + ivaTotal;
     }
 
     public int getBillId() {

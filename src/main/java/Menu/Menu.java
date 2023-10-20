@@ -81,7 +81,37 @@ public class Menu {
     }
 
     public static void updateProduct(){
-        System.out.println("\nProducto actualizado\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Actualizar un producto");
+        System.out.print("Ingrese el nombre del producto que desea actualizar: ");
+        String productName = scanner.nextLine();
+        Product productToUpdate = productsArray.getProductByName(productName);
+
+        if (productToUpdate != null) {
+            System.out.print("Nueva descripcion: ");
+            String newDesc = scanner.nextLine();
+            System.out.print("Nuevo precio: ");
+            double newPrice = scanner.nextDouble();
+            scanner.nextLine();
+            System.out.print("Nueva cantidad en stock: ");
+            int newStock = scanner.nextInt();
+            System.out.print("Nuevas categorias: ");
+            String newCategories = scanner.nextLine();
+            scanner.nextLine();
+            System.out.print("Nuevas etiquetas: ");
+            String newTags = scanner.nextLine();
+
+
+            productToUpdate.setDescription(newDesc);
+            productToUpdate.setPrice(newPrice);
+            productToUpdate.setStock(newStock);
+            productToUpdate.setCategories(newCategories);
+            productToUpdate.setTags(newTags);
+
+            System.out.println("Producto actualizado con éxito.");
+        } else {
+            System.out.println("Producto no encontrado.");
+        }
     }
 
     public static void searchProduct(){
