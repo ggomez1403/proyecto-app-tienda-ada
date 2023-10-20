@@ -49,4 +49,13 @@ public class ProductsArray {
             }
         }
     }
+
+    public Product getProductByName(String name) {
+        for (Product product : products) {
+            if (product.getName().equalsIgnoreCase(name)) {
+                return product;
+            }
+        }
+        return null;
+    }
 }

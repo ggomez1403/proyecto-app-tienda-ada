@@ -1,5 +1,10 @@
+import Bill.Bill;
+import Bill.BillItem;
+import Client.Client;
 import Menu.Menu;
+import Product.Product;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class Tienda {
