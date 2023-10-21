@@ -52,7 +52,7 @@ public class Menu {
     }
 
     private static ProductsArray productsArray = new ProductsArray();
-    private static ArrayList<Bill> bills = new ArrayList<>();
+    private static ArrayList<Bill> billsArray = new ArrayList<>();
 
     public static void addProduct(){
         Scanner scanner = new Scanner(System.in);
@@ -86,7 +86,7 @@ public class Menu {
         System.out.println("\n******PRODUCTO ELIMINADO CON EXITO******\n");
     }
 
-    public static void updateProduct(){
+    public static void updateProduct() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Actualizar un producto");
         System.out.print("Ingrese el id del producto que desea actualizar: ");
@@ -174,12 +174,12 @@ public class Menu {
             String continuar = scanner.nextLine();
             addMoreProducts = continuar.equalsIgnoreCase("si");
         }
-        bills.add(bill);
+        billsArray.add(bill);
     }
 
     public static void viewAllBills(ProductsArray productsArray){
         System.out.println("Listado de todas las facturas:");
-        for (Bill bill : bills) {
+        for (Bill bill : billsArray) {
             System.out.println(bill);
         }
     }
