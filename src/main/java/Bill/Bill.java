@@ -63,4 +63,13 @@ public class Bill {
     public void setItems(ArrayList<BillItem> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "Numero de factura: " + getBillId() +
+                "\nFecha: " + getDate() +
+                "\nCliente : " + getClient().getName() +
+                "\nTotal: $" + calculateTotal();
+
+    }
 }

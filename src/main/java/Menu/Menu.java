@@ -1,9 +1,12 @@
 package Menu;
 
+import Bill.Bill;
+import Client.Client;
 import Product.Product;
 import Product.ProductsArray;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
@@ -27,8 +30,8 @@ public class Menu {
         System.out.println("3. Actualizar producto                   |");
         System.out.println("4. Ver todos los productos               |");
         System.out.println("5. Buscar producto                       |");
-        System.out.println("6. Crear venta de producto               |");
-        System.out.println("7. Ver historial de ventas               |");
+        System.out.println("6. Crear factura de producto             |");
+        System.out.println("7. Ver historial de facturas             |");
         System.out.println("8. Salir                                 |");
         System.out.println("±----------------------------------------±");
         System.out.print("   Ingresa tu opción:    (1 - 8): ");
@@ -41,14 +44,15 @@ public class Menu {
             case 3 -> updateProduct();
             case 4 -> seeAllProducts();
             case 5 -> searchProduct();
-            case 6 -> createProductSale();
-            case 7 -> viewSalesHistory();
+            case 6 -> createBill();
+            case 7 -> viewAllBills(productsArray);
             case 8 -> System.out.println("Saliendo...");
             default -> System.out.println("Opción invalida. Por favor intenta de nuevo.");
         }
     }
 
-    static ProductsArray productsArray = new ProductsArray();
+    private static ProductsArray productsArray = new ProductsArray();
+    private static ArrayList<Bill> bills = new ArrayList<>();
 
     public static void addProduct(){
         Scanner scanner = new Scanner(System.in);
@@ -66,64 +70,118 @@ public class Menu {
         String categories = scanner.nextLine();
         System.out.print("Ingrese las etiquetas del producto: ");
         String tags = scanner.nextLine();
+        System.out.print("Ingrese la url de la imagen del producto: ");
+        String url = scanner.nextLine();
 
-        productsArray.addProduct(new Product(name, desc, price, stock, categories, tags));
+        productsArray.addProduct(new Product(name, desc, price, stock, categories, tags, url));
 
-        System.out.println("\n******Producto añadido con exito******\n");
+        System.out.println("\n******PRODUCTO AÑADIDO CON EXITO******\n");
     }
 
     public static void removeProduct(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese nombre del producto a eliminar: ");
-        String productName = scanner.nextLine();
-        productsArray.removeProduct(productName);
-        System.out.println("\n******Producto eliminado******\n");
+        System.out.print("Ingrese el id del producto que desea eliminar: ");
+        int productId = scanner.nextInt();
+        productsArray.removeProduct(productId);
+        System.out.println("\n******PRODUCTO ELIMINADO CON EXITO******\n");
     }
 
     public static void updateProduct(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Actualizar un producto");
-        System.out.print("Ingrese el nombre del producto que desea actualizar: ");
-        String productName = scanner.nextLine();
-        Product productToUpdate = productsArray.getProductByName(productName);
+        System.out.print("Ingrese el id del producto que desea actualizar: ");
+        int productId = scanner.nextInt();
+        scanner.nextLine();
 
-        if (productToUpdate != null) {
-            System.out.print("Nueva descripcion: ");
-            String newDesc = scanner.nextLine();
-            System.out.print("Nuevo precio: ");
-            double newPrice = scanner.nextDouble();
-            scanner.nextLine();
-            System.out.print("Nueva cantidad en stock: ");
-            int newStock = scanner.nextInt();
-            System.out.print("Nuevas categorias: ");
-            String newCategories = scanner.nextLine();
-            scanner.nextLine();
-            System.out.print("Nuevas etiquetas: ");
-            String newTags = scanner.nextLine();
+        System.out.print("Nuevo nombre: ");
+        String newName = scanner.nextLine();
 
+        System.out.print("Nueva descripcion: ");
+        String newDesc = scanner.nextLine();
 
-            productToUpdate.setDescription(newDesc);
-            productToUpdate.setPrice(newPrice);
-            productToUpdate.setStock(newStock);
-            productToUpdate.setCategories(newCategories);
-            productToUpdate.setTags(newTags);
+        System.out.print("Nuevo precio: ");
+        double newPrice = scanner.nextDouble();
 
-            System.out.println("Producto actualizado con éxito.");
-        } else {
-            System.out.println("Producto no encontrado.");
-        }
+        scanner.nextLine();
+        System.out.print("Nueva cantidad en stock: ");
+        int newStock = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Nuevas categorías: ");
+        String newCategories = scanner.nextLine();
+
+        System.out.print("Nuevas etiquetas: ");
+        String newTags = scanner.nextLine();
+
+        System.out.print("Nuevas url de foto: ");
+        String newUrl = scanner.nextLine();
+
+        productsArray.updateProduct(productId, newName, newDesc, newPrice, newStock, newCategories, newTags, newUrl);
     }
 
     public static void searchProduct(){
-        System.out.println("\nBuscando producto\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Búsqueda de productos");
+        System.out.print("Ingrese el nombre del producto: ");
+        String criteria = scanner.nextLine();
+
+        ArrayList<Product> foundProducts = productsArray.searchProduct(criteria);
+
+        if (foundProducts.isEmpty()) {
+            System.out.println("No se encontraron productos que coincidan con el criterio de búsqueda.");
+        } else {
+            System.out.println("\nProductos encontrados:");
+            for (Product product : foundProducts) {
+                System.out.println(product);
+            }
+        }
     }
 
-    public static void createProductSale() {
-        System.out.println("\nVenta de producto creada\n");
+    public static void createBill() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Creación de una nueva factura");
+
+        System.out.print("Nombre del cliente: ");
+        String clientName = scanner.nextLine();
+        System.out.print("Dirección del cliente: ");
+        String clientAddress = scanner.nextLine();
+
+        Client cliente = new Client(clientName, clientAddress);
+        Bill bill = new Bill(new Date(), cliente);
+
+        boolean addMoreProducts = true;
+
+        while (addMoreProducts) {
+            System.out.println("Productos disponibles:");
+            seeAllProducts();
+
+            System.out.print("Ingrese el id del producto a agregar: ");
+            int productId = scanner.nextInt();
+            System.out.print("Cantidad: ");
+            int quantity = scanner.nextInt();
+            scanner.nextLine();
+
+            Product producto = productsArray.getProductById(productId);
+
+            if (producto != null) {
+                bill.addItem(producto, quantity);
+                System.out.println("******PRODUCTO AGREGADO A LA FACTURA******");
+            } else {
+                System.out.println("******PRODUCTO NO ENCONTRADO******");
+            }
+
+            System.out.print("¿Desea agregar otro producto? (Sí/No): ");
+            String continuar = scanner.nextLine();
+            addMoreProducts = continuar.equalsIgnoreCase("si");
+        }
+        bills.add(bill);
     }
 
-    public static void viewSalesHistory(){
-        System.out.println("\nHistorial de ventas\n");
+    public static void viewAllBills(ProductsArray productsArray){
+        System.out.println("Listado de todas las facturas:");
+        for (Bill bill : bills) {
+            System.out.println(bill);
+        }
     }
 
     public static void seeAllProducts(){

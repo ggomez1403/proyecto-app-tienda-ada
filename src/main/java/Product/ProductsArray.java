@@ -1,5 +1,7 @@
 package Product;
 
+import Bill.Bill;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,14 +17,41 @@ public class ProductsArray {
         products.add(product);
     }
 
-    public void removeProduct(String productName){
+    public void removeProduct(int id){
         for (Product product : products) {
-            if (product.getName().equalsIgnoreCase(productName)) {
+            if (product.getId() == id) {
                 products.remove(product);
                 return;
             }
         }
         System.out.println("Producto no encontrado.");
+    }
+
+    public void updateProduct(int id, String name, String desc, double price, int stock, String categories, String tags, String photoUrl){
+        Product productToUpdate = this.getProductById(id);
+        if (productToUpdate != null) {
+            productToUpdate.setName(name);
+            productToUpdate.setDescription(desc);
+            productToUpdate.setPrice(price);
+            productToUpdate.setStock(stock);
+            productToUpdate.setCategories(categories);
+            productToUpdate.setTags(tags);
+            productToUpdate.setPhotoUrl(photoUrl);
+            System.out.println("******PRODUCTO ACTUALIZADO CON EXITO******");
+        }
+        else{
+            System.out.println("******PRODUCTO NO ENCONTRADO******");
+        }
+    }
+
+    public ArrayList<Product> searchProduct(String name) {
+        ArrayList<Product> foundProducts = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getName().toLowerCase().contains(name.toLowerCase())) {
+                foundProducts.add(product);
+            }
+        }
+        return foundProducts;
     }
 
     public ArrayList<Product> getAllProducts(){
@@ -50,9 +79,9 @@ public class ProductsArray {
         }
     }
 
-    public Product getProductByName(String name) {
+    public Product getProductById(int id) {
         for (Product product : products) {
-            if (product.getName().equalsIgnoreCase(name)) {
+            if (product.getId() == id) {
                 return product;
             }
         }

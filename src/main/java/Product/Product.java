@@ -8,10 +8,11 @@ public class Product {
     private int stock;
     private String categories;
     private String tags;
+    private String photoUrl;
 
     private static int ultimoId;
 
-    public Product(String name, String description, double price, int stock, String categories, String tags) {
+    public Product(String name, String description, double price, int stock, String categories, String tags, String photoUrl) {
         this.id = ++ultimoId;
         this.name = name;
         this.description = description;
@@ -19,6 +20,7 @@ public class Product {
         this.stock = stock;
         this.categories = categories;
         this.tags = tags;
+        this.photoUrl = photoUrl;
     }
 
     public int getId() {
@@ -73,15 +75,29 @@ public class Product {
         this.tags = tags;
     }
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
     @Override
     public String toString() {
-        return "\nId: " + id +
-                "\nNombre: " + name +
-                "\nDescripcion: " + description +
-                "\nPrecio: " + price +
+
+        return  "*******************************" +
+                "\nId: " + id +
+                "\n-------------------------------" +
+                "\nName: " + name +
+                "\nDescription: " + description +
+                "\nPrice: " + price +
+                "\n-------------------------------" +
                 "\nStock: " + stock +
-                "\nCategorias: " + categories +
+                "\nCategories: " + categories +
                 "\nTags: " + tags +
+                "\nPhoto Url: " + photoUrl +
+                "\n*******************************" +
                 "\n\n";
     }
 
