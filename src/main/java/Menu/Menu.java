@@ -46,7 +46,7 @@ public class Menu {
             case 4 -> seeAllProducts();
             case 5 -> searchProduct();
             case 6 -> createBill();
-            case 7 -> viewAllBills(productsArray);
+            case 7 -> viewAllBills();
             case 8 -> System.out.println("Saliendo...");
             default -> System.out.println("Opción invalida. Por favor intenta de nuevo.");
         }
@@ -190,16 +190,18 @@ public class Menu {
         billsArray.add(bill);
     }
 
-    public static void viewAllBills(ProductsArray productsArray){
+    public static void viewAllBills(){
         System.out.println("Listado de todas las facturas:");
         for (Bill bill : billsArray) {
+            System.out.println("***********************************");
             System.out.println(bill);
+            System.out.println("***********************************");
             System.out.println("Productos comprados");
 
             for (BillItem item: bill.getItems()){
-                System.out.println(item.getProduct().getName() + " - Cantidad: " + item.getQuantity() + " unidades");
+                System.out.println(item.getProduct().getName() + " - " + item.getQuantity() + " unidades");
             }
-            System.out.println("----------------------");
+            System.out.println("***********************************");
         }
     }
 
