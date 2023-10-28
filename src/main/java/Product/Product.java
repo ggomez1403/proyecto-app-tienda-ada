@@ -23,6 +23,36 @@ public class Product {
         this.photoUrl = photoUrl;
     }
 
+    public boolean hasStock(){
+        return this.stock != 0;
+    }
+
+    public boolean productPriceIsGreater(double productPrice){
+        return this.price > productPrice;
+    }
+
+    public boolean productPriceIsLess(double productPrice){
+        return this.price < productPrice;
+    }
+
+    public boolean productContainKeyWord(char letter){
+        return name.toLowerCase().contains(Character.toString(letter).toLowerCase());
+    }
+
+    public void discountStock(int quantity){
+        if(hasStock()){
+            stock -= quantity;
+        }
+    }
+
+    public static String removeTrailingZeros(String formattedNumber) {
+        if (formattedNumber.contains(".")) {
+            formattedNumber = formattedNumber.replaceAll("0*$", "");
+            formattedNumber = formattedNumber.replaceAll(",$", "");
+        }
+        return formattedNumber;
+    }
+
     public int getId() {
         return id;
     }
@@ -59,7 +89,7 @@ public class Product {
         this.stock = stock;
     }
 
-    public String  getCategories() {
+    public String getCategories() {
         return categories;
     }
 
@@ -101,35 +131,5 @@ public class Product {
                 "\nPhoto Url: " + photoUrl +
                 "\n*******************************" +
                 "\n\n";
-    }
-
-    public boolean hasStock(){
-        return this.stock != 0;
-    }
-
-    public boolean productPriceIsGreater(double productPrice){
-        return this.price > productPrice;
-    }
-
-    public boolean productPriceIsLess(double productPrice){
-        return this.price < productPrice;
-    }
-
-    public boolean productContainKeyWord(char letter){
-        return name.toLowerCase().contains(Character.toString(letter).toLowerCase());
-    }
-
-    public void discountStock(int quantity){
-        if(hasStock()){
-            stock -= quantity;
-        }
-    }
-
-    public static String removeTrailingZeros(String formattedNumber) {
-        if (formattedNumber.contains(".")) {
-            formattedNumber = formattedNumber.replaceAll("0*$", "");
-            formattedNumber = formattedNumber.replaceAll(",$", "");
-        }
-        return formattedNumber;
     }
 }

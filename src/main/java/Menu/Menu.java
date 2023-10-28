@@ -2,9 +2,7 @@ package Menu;
 
 import Bill.*;
 import Client.Client;
-import Product.Product;
-import Product.ProductsArray;
-import Product.Category;
+import Product.*;
 
 import java.util.ArrayList;
 import java.util.Date;

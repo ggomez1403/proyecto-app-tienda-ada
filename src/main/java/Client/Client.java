@@ -13,6 +13,10 @@ public class Client {
         this.address = address;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

@@ -2,7 +2,7 @@ import Menu.Menu;
 
 import java.util.Scanner;
 
-public class Tienda {
+public class Store {
     public static void main(String[] args) {
         runMenu();
     }
