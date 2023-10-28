@@ -101,26 +101,11 @@ public enum Category {
     }
 
     public static String getAllCategories(){
-        return "Categorias disponibles" +
-        "\n1. Lacteos, huevos y refrigerados" +
-        "\n2. Pasabocas" +
-        "\n3. Dulces y postres" +
-        "\n4. Bebidas" +
-        "\n5. Productos Congelados" +
-        "\n6. Helados" +
-        "\n7. Vinos y licores" +
-        "\n8. Cigarrillos" +
-        "\n9. Despensa" +
-        "\n10. Cuidado de bebe" +
-        "\n11. Drogueria" +
-        "\n12. Panaderia y pasteleria" +
-        "\n13. Hogar y decoracion" +
-        "\n14. Aseo y Hogar" +
-        "\n15. Limpieza y cocina" +
-        "\n16. Mascotas" +
-        "\n17. Cuidado personal" +
-        "\n18. Cuidado de ropa" +
-        "\n19. Iluminacion electricos" +
-        "\n20. Electrodomesticos";
+        String categories = "";
+        for (int i = 0; i < Category.values().length; i++) {
+            categories += (i+1) + ". " + (Category.values()[i].getCategoryValue() + "\n");
+        }
+
+        return categories;
     }
 }
