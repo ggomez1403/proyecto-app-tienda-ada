@@ -5,6 +5,7 @@ import Product.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Bill {
     private int id;
@@ -22,8 +23,13 @@ public class Bill {
     }
 
     public void addItem(Product product, int quantity){
-        BillItem item = new BillItem(product, quantity);
-        items.add(item);
+        if(product.getStock() >= quantity){
+            BillItem item = new BillItem(product, quantity);
+            items.add(item);
+            product.discountStock(quantity);
+        } else{
+            System.out.println("No hay suficiente stock para " + product.getName());
+        }
     }
 
     public double calculateTotal(){
@@ -66,10 +72,13 @@ public class Bill {
 
     @Override
     public String toString() {
+        String formattedNum = String.format("$%,.2f", calculateTotal());
+        String productFormattedNum = Product.removeTrailingZeros(formattedNum);
+
         return "Numero de factura: " + getBillId() +
                 "\nFecha: " + getDate() +
                 "\nCliente : " + getClient().getName() +
-                "\nTotal: $" + calculateTotal();
+                "\nTotal: " + productFormattedNum;
 
     }
 }

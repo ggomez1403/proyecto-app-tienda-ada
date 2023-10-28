@@ -1,9 +1,10 @@
 package Menu;
 
-import Bill.Bill;
+import Bill.*;
 import Client.Client;
 import Product.Product;
 import Product.ProductsArray;
+import Product.Category;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,22 +59,31 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el nombre del producto: ");
         String name = scanner.nextLine();
+
         System.out.print("Ingrese la descripcion del producto: ");
         String desc = scanner.nextLine();
+
         System.out.print("Ingrese el precio del producto: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
+
         System.out.print("Ingrese la cantidad de stock del producto: ");
         int stock = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Ingrese la categoria del producto: ");
-        String categories = scanner.nextLine();
+
+        System.out.print(Category.getAllCategories() + "\nIngrese un numero para seleccionar la categoria del producto: ");
+        int categories = scanner.nextInt();
+        String category = Category.getCategoryByNumber(categories);
+
+        scanner.nextLine();
+
         System.out.print("Ingrese las etiquetas del producto: ");
         String tags = scanner.nextLine();
+
         System.out.print("Ingrese la url de la imagen del producto: ");
         String url = scanner.nextLine();
 
-        productsArray.addProduct(new Product(name, desc, price, stock, categories, tags, url));
+        productsArray.addProduct(new Product(name, desc, price, stock, category, tags, url));
 
         System.out.println("\n******PRODUCTO AÑADIDO CON EXITO******\n");
     }
@@ -107,8 +117,11 @@ public class Menu {
         int newStock = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Nuevas categorías: ");
-        String newCategories = scanner.nextLine();
+        System.out.print(Category.getAllCategories() + "Nuevas categorías: ");
+        int category = scanner.nextInt();
+        String newCategories = Category.getCategoryByNumber(category);
+
+        scanner.nextLine();
 
         System.out.print("Nuevas etiquetas: ");
         String newTags = scanner.nextLine();
@@ -181,6 +194,12 @@ public class Menu {
         System.out.println("Listado de todas las facturas:");
         for (Bill bill : billsArray) {
             System.out.println(bill);
+            System.out.println("Productos comprados");
+
+            for (BillItem item: bill.getItems()){
+                System.out.println(item.getProduct().getName() + " - Cantidad: " + item.getQuantity() + " unidades");
+            }
+            System.out.println("----------------------");
         }
     }
 

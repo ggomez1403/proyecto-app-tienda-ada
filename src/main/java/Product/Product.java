@@ -59,7 +59,7 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getCategories() {
+    public String  getCategories() {
         return categories;
     }
 
@@ -85,13 +85,15 @@ public class Product {
 
     @Override
     public String toString() {
+        String formattedNum = String.format("$%,.2f", price);
+        String productFormattedNum = Product.removeTrailingZeros(formattedNum);
 
         return  "*******************************" +
                 "\nId: " + id +
                 "\n-------------------------------" +
                 "\nName: " + name +
                 "\nDescription: " + description +
-                "\nPrice: " + price +
+                "\nPrice: " + productFormattedNum +
                 "\n-------------------------------" +
                 "\nStock: " + stock +
                 "\nCategories: " + categories +
@@ -117,5 +119,17 @@ public class Product {
         return name.toLowerCase().contains(Character.toString(letter).toLowerCase());
     }
 
+    public void discountStock(int quantity){
+        if(hasStock()){
+            stock -= quantity;
+        }
+    }
 
+    public static String removeTrailingZeros(String formattedNumber) {
+        if (formattedNumber.contains(".")) {
+            formattedNumber = formattedNumber.replaceAll("0*$", "");
+            formattedNumber = formattedNumber.replaceAll(",$", "");
+        }
+        return formattedNumber;
+    }
 }
