@@ -1,0 +1,31 @@
+package Product;
+
+import java.util.ArrayList;
+
+public class ProductService implements ProductServiceInterface{
+    private ProductsArray productsArray;
+
+    public ProductService(ProductsArray productsArray) {
+        this.productsArray = productsArray;
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        productsArray.addProduct(product);
+    }
+
+    @Override
+    public void removeProduct(int id) {
+        productsArray.removeProduct(id);
+    }
+
+    @Override
+    public Product findProductById(int id) {
+        return productsArray.getProductById(id);
+    }
+
+    @Override
+    public ArrayList<Product> getAllProducts() {
+        return productsArray.getAllProducts();
+    }
+}
