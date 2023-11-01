@@ -1,7 +1,7 @@
 package Menu;
 
 import Bill.*;
-import Client.Client;
+import Client.*;
 import Product.*;
 
 import java.util.ArrayList;
@@ -50,8 +50,9 @@ public class Menu {
         }
     }
 
-    private static ProductsArray productsArray = new ProductsArray();
-    private static ArrayList<Bill> billsArray = new ArrayList<>();
+    static ProductsArray productsArray = new ProductsArray();
+    static ArrayList<Bill> billsArray = new ArrayList<>();
+    static ProductServiceInterface productService = new ProductService(productsArray);
 
     public static void addProduct(){
         Scanner scanner = new Scanner(System.in);
@@ -81,7 +82,7 @@ public class Menu {
         System.out.print("Ingrese la url de la imagen del producto: ");
         String url = scanner.nextLine();
 
-        productsArray.addProduct(new Product(name, desc, price, stock, category, tags, url));
+        productService.addProduct(new Product(name, desc, price, stock, category, tags, url));
 
         System.out.println("\n******PRODUCTO AÑADIDO CON EXITO******\n");
     }
@@ -90,7 +91,7 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el id del producto que desea eliminar: ");
         int productId = scanner.nextInt();
-        productsArray.removeProduct(productId);
+        productService.removeProduct(productId);
         System.out.println("\n******PRODUCTO ELIMINADO CON EXITO******\n");
     }
 
@@ -172,7 +173,7 @@ public class Menu {
             int quantity = scanner.nextInt();
             scanner.nextLine();
 
-            Product producto = productsArray.getProductById(productId);
+            Product producto = productService.findProductById(productId);
 
             if (producto != null) {
                 bill.addItem(producto, quantity);
@@ -205,7 +206,7 @@ public class Menu {
 
     public static void seeAllProducts(){
         System.out.println("\nListado de todos los productos\n");
-        ArrayList<Product> allProducts = productsArray.getAllProducts();
+        ArrayList<Product> allProducts = productService.getAllProducts();
         for (Product product : allProducts) {
             System.out.println(product);
         }
