@@ -1,6 +1,6 @@
-package Product;
+package persistence;
 
-import Bill.Bill;
+import domain.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;

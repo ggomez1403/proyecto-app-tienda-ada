@@ -1,7 +1,4 @@
-package Bill;
-
-import Client.Client;
-import Product.Product;
+package domain;
 
 import java.util.ArrayList;
 import java.util.Date;

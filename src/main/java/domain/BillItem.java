@@ -1,6 +1,6 @@
-package Bill;
+package domain;
 
-import Product.Product;
+import domain.Product;
 
 public class BillItem {
     private Product product;

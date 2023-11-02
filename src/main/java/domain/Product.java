@@ -1,4 +1,4 @@
-package Product;
+package domain;
 
 public class Product {
     private int id;

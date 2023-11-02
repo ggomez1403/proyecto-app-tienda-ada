@@ -1,4 +1,4 @@
-package Product;
+package application;
 
 public enum Category {
     LACTEOS_HUEVOS_Y_REFRIGERADOS("Lacteos, huevos y refrigerados"),

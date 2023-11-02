@@ -1,4 +1,6 @@
-package Product;
+package application;
+
+import domain.Product;
 
 import java.util.ArrayList;
 

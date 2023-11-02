@@ -1,8 +1,10 @@
-package Menu;
+package application;
 
-import Bill.*;
-import Client.*;
-import Product.*;
+import domain.Bill;
+import domain.BillItem;
+import domain.Client;
+import domain.Product;
+import persistence.ProductsArray;
 
 import java.util.ArrayList;
 import java.util.Date;

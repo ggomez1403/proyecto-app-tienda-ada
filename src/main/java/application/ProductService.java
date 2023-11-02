@@ -1,8 +1,10 @@
-package Product;
+package application;
+
+import domain.Product;
 
 import java.util.ArrayList;
 
-public class ProductService implements ProductServiceInterface{
+public class ProductService implements ProductServiceInterface {
     private ProductsArray productsArray;
 
     public ProductService(ProductsArray productsArray) {

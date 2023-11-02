@@ -1,4 +1,4 @@
-package Client;
+package domain;
 
 public class Client {
     private int id;
