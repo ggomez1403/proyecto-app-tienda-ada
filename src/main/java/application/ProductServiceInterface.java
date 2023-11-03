@@ -8,6 +8,5 @@ public interface ProductServiceInterface {
     void addProduct(Product product);
     void removeProduct(int id);
     Product findProductById(int id);
-
     ArrayList<Product> getAllProducts();
 }

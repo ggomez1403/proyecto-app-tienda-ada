@@ -4,6 +4,7 @@ import domain.Bill;
 import domain.BillItem;
 import domain.Client;
 import domain.Product;
+import persistence.CSVProductLoader;
 import persistence.ProductsArray;
 
 import java.util.ArrayList;
@@ -11,6 +12,22 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
+
+    static ProductsArray productsArray = new ProductsArray();
+    static ProductServiceInterface productService = new ProductService(productsArray);
+    static CSVProductLoader csvProductLoader = new CSVProductLoader();
+
+
+    public static void runMenu(){
+        CSVProductLoader.loadProductsFromCSV("data/inventory.csv", productsArray);
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+        do{
+            Menu.displayMenu();
+            choice = scanner.nextInt();
+            Menu.handleUserChoice(choice);
+        }while(choice != 8);
+    }
     public static void displayMenu(){
         System.out.println(
                 """
@@ -38,8 +55,8 @@ public class Menu {
         System.out.print("   Ingresa tu opción:    (1 - 8): ");
     }
 
-    public static void handleUserChoice(int choice){
-        switch (choice){
+    public static void handleUserChoice(int choice) {
+        switch (choice) {
             case 1 -> addProduct();
             case 2 -> removeProduct();
             case 3 -> updateProduct();
@@ -52,9 +69,8 @@ public class Menu {
         }
     }
 
-    static ProductsArray productsArray = new ProductsArray();
     static ArrayList<Bill> billsArray = new ArrayList<>();
-    static ProductServiceInterface productService = new ProductService(productsArray);
+
 
     public static void addProduct(){
         Scanner scanner = new Scanner(System.in);
@@ -207,10 +223,16 @@ public class Menu {
     }
 
     public static void seeAllProducts(){
+
         System.out.println("\nListado de todos los productos\n");
         ArrayList<Product> allProducts = productService.getAllProducts();
-        for (Product product : allProducts) {
-            System.out.println(product);
+        if (allProducts.isEmpty()) {
+            System.out.println("No hay productos en la lista.");
+        } else {
+            System.out.println("Listado de todos los productos:\n");
+            for (Product product : allProducts) {
+                System.out.println(product);
+            }
         }
     }
 }

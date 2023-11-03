@@ -1,19 +1,7 @@
 import application.Menu;
 
-import java.util.Scanner;
-
 public class Store {
     public static void main(String[] args) {
-        runMenu();
-    }
-
-    public static void runMenu(){
-        Scanner scanner = new Scanner(System.in);
-        int choice;
-        do{
-            Menu.displayMenu();
-            choice = scanner.nextInt();
-            Menu.handleUserChoice(choice);
-        }while(choice != 8);
+        Menu.runMenu();
     }
 }
