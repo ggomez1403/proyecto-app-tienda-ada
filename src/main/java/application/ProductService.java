@@ -5,6 +5,7 @@ import domain.Product;
 import persistence.ProductsArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductService implements ProductServiceInterface {
     private ProductsArray productsArray;
@@ -31,5 +32,10 @@ public class ProductService implements ProductServiceInterface {
     @Override
     public ArrayList<Product> getAllProducts() {
         return productsArray.getAllProducts();
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        return productsArray.getProductsByCategory(category);
     }
 }

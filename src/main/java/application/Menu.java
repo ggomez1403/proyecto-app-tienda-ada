@@ -9,6 +9,7 @@ import persistence.ProductsArray;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -26,7 +27,7 @@ public class Menu {
             Menu.displayMenu();
             choice = scanner.nextInt();
             Menu.handleUserChoice(choice);
-        }while(choice != 8);
+        }while(choice != 9);
     }
     public static void displayMenu(){
         System.out.println(
@@ -48,11 +49,12 @@ public class Menu {
         System.out.println("3. Actualizar producto                   |");
         System.out.println("4. Ver todos los productos               |");
         System.out.println("5. Buscar producto                       |");
-        System.out.println("6. Crear factura de producto             |");
-        System.out.println("7. Ver historial de facturas             |");
-        System.out.println("8. Salir                                 |");
+        System.out.println("6. Buscar producto por categoria         |");
+        System.out.println("7. Crear factura de producto             |");
+        System.out.println("8. Ver historial de facturas             |");
+        System.out.println("9. Salir                                 |");
         System.out.println("±----------------------------------------±");
-        System.out.print("   Ingresa tu opción:    (1 - 8): ");
+        System.out.print("   Ingresa tu opción:    (1 - 9): ");
     }
 
     public static void handleUserChoice(int choice) {
@@ -62,15 +64,15 @@ public class Menu {
             case 3 -> updateProduct();
             case 4 -> seeAllProducts();
             case 5 -> searchProduct();
-            case 6 -> createBill();
-            case 7 -> viewAllBills();
-            case 8 -> System.out.println("Saliendo...");
+            case 6 -> getProductsByCategory(productsArray);
+            case 7 -> createBill();
+            case 8 -> viewAllBills();
+            case 9 -> System.out.println("Saliendo...");
             default -> System.out.println("Opción invalida. Por favor intenta de nuevo.");
         }
     }
 
     static ArrayList<Bill> billsArray = new ArrayList<>();
-
 
     public static void addProduct(){
         Scanner scanner = new Scanner(System.in);
@@ -223,14 +225,29 @@ public class Menu {
     }
 
     public static void seeAllProducts(){
-
         System.out.println("\nListado de todos los productos\n");
         ArrayList<Product> allProducts = productService.getAllProducts();
         if (allProducts.isEmpty()) {
             System.out.println("No hay productos en la lista.");
         } else {
-            System.out.println("Listado de todos los productos:\n");
             for (Product product : allProducts) {
+                System.out.println(product);
+            }
+        }
+    }
+
+    public static void getProductsByCategory(ProductsArray productsArray){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la categoria para consultar los productos: ");
+        String category = scanner.nextLine();
+
+        List<Product> products = productsArray.getProductsByCategory(category);
+
+        if(products.isEmpty()){
+            System.out.println("No se encontraron products en la categoria especificada");
+        } else{
+            System.out.println("\nProductos en la categoria '" + category + "': ");
+            for(Product product : products){
                 System.out.println(product);
             }
         }

@@ -5,6 +5,7 @@ import domain.Product;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class ProductsArray {
     private ArrayList<Product> products;
@@ -86,5 +87,15 @@ public class ProductsArray {
             }
         }
         return null;
+    }
+
+    public List<Product> getProductsByCategory(String category) {
+        List<Product> productsInCategory = new ArrayList<>();
+        for(Product product : this.getAllProducts()){
+            if(product.getCategories().equalsIgnoreCase(category)){
+                productsInCategory.add(product);
+            }
+        }
+        return productsInCategory;
     }
 }
