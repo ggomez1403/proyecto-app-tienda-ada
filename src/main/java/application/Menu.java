@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class Menu {
 
     static ProductsArray productsArray = new ProductsArray();
+    static ArrayList<Bill> billsArray = new ArrayList<>();
     static ProductServiceInterface productService = new ProductService(productsArray);
     static CSVProductLoader csvProductLoader = new CSVProductLoader();
-
 
     public static void runMenu(){
         CSVProductLoader.loadProductsFromCSV("data/inventory.csv", productsArray);
@@ -71,8 +71,6 @@ public class Menu {
             default -> System.out.println("Opción invalida. Por favor intenta de nuevo.");
         }
     }
-
-    static ArrayList<Bill> billsArray = new ArrayList<>();
 
     public static void addProduct(){
         Scanner scanner = new Scanner(System.in);
