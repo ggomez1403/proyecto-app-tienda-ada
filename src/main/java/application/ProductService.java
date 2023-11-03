@@ -2,6 +2,8 @@ package application;
 
 import domain.Product;
 
+import persistence.ProductsArray;
+
 import java.util.ArrayList;
 
 public class ProductService implements ProductServiceInterface {
