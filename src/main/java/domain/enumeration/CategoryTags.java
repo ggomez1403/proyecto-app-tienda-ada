@@ -113,8 +113,5 @@ public enum CategoryTags {
     public Category getCategory() {
         return category;
     }
-
-    //enum de etiquetas
-//excepciones
 }
 
