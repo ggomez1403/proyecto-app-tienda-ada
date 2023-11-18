@@ -1,4 +1,4 @@
-package domain;
+package domain.model;
 
 public class Product {
     private int id;
@@ -118,18 +118,6 @@ public class Product {
         String formattedNum = String.format("$%,.2f", price);
         String productFormattedNum = Product.removeTrailingZeros(formattedNum);
 
-        return  "*******************************" +
-                "\nId: " + id +
-                "\n-------------------------------" +
-                "\nName: " + name +
-                "\nDescription: " + description +
-                "\nPrice: " + productFormattedNum +
-                "\n-------------------------------" +
-                "\nStock: " + stock +
-                "\nCategories: " + categories +
-                "\nTags: " + tags +
-                "\nPhoto Url: " + photoUrl +
-                "\n*******************************" +
-                "\n\n";
+        return String.format("%-5s|%-60s |%-5s| %-20s | %-30s | %-20s | %-10.2f | %s", getId(), getName(),getStock(), getDescription(), getCategories(), getTags(), getPrice(), getPhotoUrl());
     }
 }

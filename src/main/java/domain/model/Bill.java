@@ -1,19 +1,19 @@
-package domain;
+package domain.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Bill {
     private int id;
-    private Date date;
+    private LocalDate date;
     private Client client;
     private ArrayList<BillItem> items;
 
     private static int lastId;
 
-    public Bill(Date date, Client client) {
+    public Bill(Client client) {
         this.id = ++lastId;
-        this.date = date;
+        this.date = LocalDate.now();
         this.client = client;
         this.items = new ArrayList<>();
     }
@@ -42,11 +42,11 @@ public class Bill {
         return id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

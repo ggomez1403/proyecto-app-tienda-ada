@@ -1,6 +1,6 @@
 package persistence;
 
-import domain.Product;
+import domain.model.Product;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -16,6 +16,11 @@ public class CSVProductLoader {
             for (CSVRecord csvRecord : csvParser) {
                 String name = csvRecord.get("Nombre");
                 String description = csvRecord.get("Descripcion");
+
+                if(description.isEmpty()){
+                    description = "Sin descripcion";
+                }
+
                 String categories = csvRecord.get("Categoria");
                 String tags = csvRecord.get("Etiquetas");
                 String priceStr = csvRecord.get("Precio");
@@ -26,6 +31,11 @@ public class CSVProductLoader {
                 }
 
                 String photoUrl = csvRecord.get("URL FOTO");
+
+                if(photoUrl.isEmpty()){
+                    photoUrl = "Sin URL";
+                }
+
                 Random random = new Random();
                 int stock = random.nextInt(101);
 

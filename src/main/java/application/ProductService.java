@@ -1,7 +1,8 @@
 package application;
 
-import domain.Product;
+import domain.model.Product;
 
+import domain.service.ProductServiceInterface;
 import persistence.ProductsArray;
 
 import java.util.ArrayList;

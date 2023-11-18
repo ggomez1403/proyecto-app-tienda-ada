@@ -1,6 +1,4 @@
-package domain;
-
-import domain.Product;
+package domain.model;
 
 public class BillItem {
     private Product product;

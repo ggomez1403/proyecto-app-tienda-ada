@@ -1,6 +1,6 @@
 package persistence;
 
-import domain.Product;
+import domain.model.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
