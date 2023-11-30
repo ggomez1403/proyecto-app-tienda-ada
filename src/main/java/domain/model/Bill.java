@@ -2,44 +2,26 @@ package domain.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bill {
     private int id;
     private LocalDate date;
     private Client client;
-    private ArrayList<BillItem> items;
-
-    private static int lastId;
+    private List<BillDetail> billDetails;
 
     public Bill(Client client) {
-        this.id = ++lastId;
         this.date = LocalDate.now();
         this.client = client;
-        this.items = new ArrayList<>();
+        this.billDetails = new ArrayList<>();
     }
 
-    public void addItem(Product product, int quantity){
-        if(product.getStock() >= quantity){
-            BillItem item = new BillItem(product, quantity);
-            items.add(item);
-            product.discountStock(quantity);
-        } else{
-            System.out.println("No hay suficiente stock para " + product.getName());
-        }
-    }
-
-    public double calculateTotal(){
-        double subTotal = 0.0;
-        double ivaRate = 19.0;
-        for (BillItem item:items){
-            subTotal += item.calcularSubtotal();
-        }
-        double ivaTotal = (subTotal * ivaRate) / 100.0;
-        return subTotal + ivaTotal;
-    }
-
-    public int getBillId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -58,23 +40,16 @@ public class Bill {
         this.client = client;
     }
 
-    public ArrayList<BillItem> getItems() {
-        return items;
+    public List<BillDetail> getBillDetails() {
+        return billDetails;
     }
 
-    public void setItems(ArrayList<BillItem> items) {
-        this.items = items;
+    public void setBillDetails(List<BillDetail> billDetails) {
+        this.billDetails = billDetails;
     }
 
     @Override
     public String toString() {
-        String formattedNum = String.format("$%,.2f", calculateTotal());
-        String productFormattedNum = Product.removeTrailingZeros(formattedNum);
-
-        return "Numero de factura: " + getBillId() +
-                "\nFecha: " + getDate() +
-                "\nCliente : " + getClient().getName() +
-                "\nTotal: " + productFormattedNum;
-
+        return String.format("%-5s|%-25s |%-15s", getId(), getDate(), getClient().getName());
     }
 }

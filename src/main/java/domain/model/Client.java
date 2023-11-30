@@ -5,16 +5,17 @@ public class Client {
     private String name;
     private String address;
 
-    private static int lastId;
-
     public Client(String name, String address) {
-        this.id = ++lastId;
         this.name = name;
         this.address = address;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -31,5 +32,10 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-5s|%-25s |%-50s", getId(), getName(), getAddress());
     }
 }

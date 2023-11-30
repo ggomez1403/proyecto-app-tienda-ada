@@ -1,4 +1,4 @@
-import application.Menu;
+package application;
 
 public class Store {
     public static void main(String[] args) {

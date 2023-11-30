@@ -1,60 +1,36 @@
 package domain.model;
 
+import domain.service.ProductService;
+import infrastructure.dao.ProductDAO;
+import domain.service.interfaces.ProductServiceInterface;
+import infrastructure.repository.ProductRepository;
+
 public class Product {
     private int id;
     private String name;
     private String description;
     private double price;
     private int stock;
-    private String categories;
-    private String tags;
+    private int category;
+    private int tag;
     private String photoUrl;
 
-    private static int ultimoId;
-
-    public Product(String name, String description, double price, int stock, String categories, String tags, String photoUrl) {
-        this.id = ++ultimoId;
+    public Product(String name, String description, double price, int stock, int category, int tag, String photoUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
-        this.categories = categories;
-        this.tags = tags;
+        this.category = category;
+        this.tag = tag;
         this.photoUrl = photoUrl;
-    }
-
-    public boolean hasStock(){
-        return this.stock != 0;
-    }
-
-    public boolean productPriceIsGreater(double productPrice){
-        return this.price > productPrice;
-    }
-
-    public boolean productPriceIsLess(double productPrice){
-        return this.price < productPrice;
-    }
-
-    public boolean productContainKeyWord(char letter){
-        return name.toLowerCase().contains(Character.toString(letter).toLowerCase());
-    }
-
-    public void discountStock(int quantity){
-        if(hasStock()){
-            stock -= quantity;
-        }
-    }
-
-    public static String removeTrailingZeros(String formattedNumber) {
-        if (formattedNumber.contains(".")) {
-            formattedNumber = formattedNumber.replaceAll("0*$", "");
-            formattedNumber = formattedNumber.replaceAll(",$", "");
-        }
-        return formattedNumber;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -89,20 +65,20 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getCategories() {
-        return categories;
+    public int getCategory() {
+        return category;
     }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
-    public String getTags() {
-        return tags;
+    public int getTag() {
+        return tag;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void setTag(int tag) {
+        this.tag = tag;
     }
 
     public String getPhotoUrl() {
@@ -113,11 +89,44 @@ public class Product {
         this.photoUrl = photoUrl;
     }
 
+    public boolean hasStock() {
+        return this.stock != 0;
+    }
+
+    public boolean productPriceIsGreater(double productPrice) {
+        return this.price > productPrice;
+    }
+
+    public boolean productPriceIsLess(double productPrice) {
+        return this.price < productPrice;
+    }
+
+    public boolean productContainKeyWord(char letter) {
+        return name.toLowerCase().contains(Character.toString(letter).toLowerCase());
+    }
+
+    public void discountStock(int quantity) {
+        if (hasStock()) {
+            stock -= quantity;
+        }
+    }
+
+    static ProductDAO productDAO = new ProductDAO();
+    static ProductRepository productRepository = new ProductRepository(productDAO);
+    static ProductServiceInterface productService = new ProductService(productRepository);
+
     @Override
     public String toString() {
-        String formattedNum = String.format("$%,.2f", price);
-        String productFormattedNum = Product.removeTrailingZeros(formattedNum);
-
-        return String.format("%-5s|%-60s |%-5s| %-20s | %-30s | %-20s | %-10.2f | %s", getId(), getName(),getStock(), getDescription(), getCategories(), getTags(), getPrice(), getPhotoUrl());
+        return String.format(
+                "%-5s | %-25s | %-7s | %-30s | %-40s | %-43s | %-7.3f | %s",
+                getId(),
+                getName(),
+                getStock(),
+                getDescription(),
+                productService.getCategoryNameById(getCategory()),
+                productService.getTagNameById(getTag()),
+                getPrice(),
+                getPhotoUrl()
+        );
     }
 }

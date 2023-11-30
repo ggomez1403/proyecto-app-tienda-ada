@@ -1,15 +1,14 @@
 package application;
 
 import domain.enumeration.Menus;
-import persistence.CSVProductLoader;
+import input.SuperKeyBoard;
 
-import static application.ManageProducts.*;
-import static application.ManageBills.*;
+import static ui.ManageProducts.*;
+import static ui.ManageBills.*;
 
 public class Menu {
 
     public static void runMenu() {
-        CSVProductLoader.loadProductsFromCSV("data/inventory.csv", productsArray);
         int choice;
         do {
             Menu.displayMenu();
