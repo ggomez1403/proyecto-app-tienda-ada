@@ -14,7 +14,7 @@ public enum Menus {
         ±----------------------------------------±
         |   Administrador Mi Tienda de Barrio    |
         ±----------------------------------------±
-        | 1. Gestionar de productos              |
+        | 1. Gestionar productos                 |
         | 2. Gestionar ventas y facturas         |
         | 3. Salir                               |
         ±----------------------------------------±
@@ -29,11 +29,11 @@ public enum Menus {
         | 2. Descripcion                                 |
         | 3. Precio                                      |
         | 4. Cantidad de stock                           |
-        | 5. Categoria y etiqueta                        |
-        | 6. URL de la foto                              |
+        | 5. URL de la foto                              |
+        | 6. Categoria y etiqueta                        |
         | 7. Cancelar                                    |
         ±------------------------------------------------±
-                Select the value to update (1 - 7):
+             Seleccione el campo a actualizar (1 - 7):
             """),
 
     MANAGE_PRODUCTS_MENU("""
